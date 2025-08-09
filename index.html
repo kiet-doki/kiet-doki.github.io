@@ -1,213 +1,378 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kiet Do • Portfolio</title>
+  <meta name="description" content="Kiet Do — data analyst. Selected projects, soft skills, and resume." />
+  <link rel="icon" href="images/favicon.png" />
+  
+  <!-- OG/Twitter -->
+  <meta property="og:title" content="Kiet Do — Portfolio" />
+  <meta property="og:description" content="Projects, soft skills, and resume." />
+  <meta property="og:image" content="images/profile%20.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-<html>
-	<head>
-		<title>Kiet Do</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #0f162d;
+      --card: #121a36;
+      --text: #e6e8ee;
+      --muted: #9aa3b2;
+      --brand: #22d3ee;
+      --brand-2: #8b5cf6;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --maxw: 1080px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: radial-gradient(1200px 600px at 75% -10%, rgba(34,211,238,.20), transparent 60%),
+                  radial-gradient(900px 500px at 10% -10%, rgba(139,92,246,.15), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    * { box-sizing: border-box; }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible, button:focus-visible { outline: 3px solid rgba(34,211,238,.7); outline-offset: 2px; }
+    img { max-width: 100%; display: block; }
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
 
-		<!-- Wrapper -->
-			<div id="wrapper" class="fade-in">
+    /* Nav */
+    .nav { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(160%) blur(10px);
+      background: linear-gradient(to bottom, rgba(11,16,32,.75), rgba(11,16,32,.4));
+      border-bottom: 1px solid rgba(255,255,255,.06); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { font-weight: 700; font-size: 1.2rem; }
+    .brand .dot { color: var(--brand); }
+    .nav ul { display: flex; gap: 18px; list-style: none; margin: 0; padding: 0; }
+    .nav a { padding: 8px 12px; border-radius: 10px; color: var(--muted); }
+    .nav a:hover { background: rgba(255,255,255,.06); color: var(--text); }
+    .btn { display: inline-flex; align-items: center; gap: .5rem; border: 1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 10px 14px; }
+    .btn.primary { border-color: transparent; background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #081326; font-weight: 600; }
+    .btn.ghost { border-color: rgba(255,255,255,.2); }
 
-				<!-- Intro -->
-					<div id="intro">
-						<h1>welcome!</h1>
-						
-						<ul class="actions">
-							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
-						</ul>
-					</div>
+    /* Hero */
+    .hero { padding: 84px 0 36px; }
+    .hero-inner { display: grid; grid-template-columns: 1.15fr .85fr; gap: 36px; align-items: center; }
+    .eyebrow { color: var(--brand); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; font-size: .85rem; }
+    .title { font-size: clamp(38px, 6vw, 64px); line-height: 1.05; margin: .35rem 0 .6rem; font-weight: 700; }
+    .subtitle { color: var(--muted); max-width: 56ch; }
+    .cta { display: flex; gap: 12px; margin-top: 22px; }
+    .avatar-wrap { position: relative; }
+    .avatar { border-radius: 24px; overflow: hidden; box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,.08); }
+    .blob { position: absolute; inset: -10% -10% auto auto; width: 140px; height: 140px; background: radial-gradient(circle at 30% 30%, var(--brand), transparent 60%); filter: blur(30px); opacity: .6; pointer-events: none; }
 
-				<!-- Header -->
-					<header id="header">
+    /* Sections */
+    .section { padding: 72px 0; }
+    .section h2 { font-size: clamp(26px, 4vw, 40px); margin: 0 0 8px; font-weight: 700; }
+    .section p.lead { color: var(--muted); margin: 0 0 28px; }
+
+    /* Projects */
+    .grid { display: grid; gap: 22px; }
+    .grid.projects { grid-template-columns: repeat(12, 1fr); }
+    .card { grid-column: span 12; background: var(--card); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,.35); border-color: rgba(34,211,238,.35); }
+    .card-media { position: relative; }
+    .card-media img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+    .badge { position: absolute; left: 14px; top: 14px; backdrop-filter: blur(8px); background: rgba(9,13,28,.6); border: 1px solid rgba(255,255,255,.12); color: #cfe7ff; padding: 6px 10px; border-radius: 999px; font-size: .8rem; }
+    .card-body { padding: 18px 18px 20px; }
+    .card h3 { margin: 0 0 6px; font-size: 1.15rem; font-weight: 600; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 0; }
+    .chip { display: inline-block; padding: 6px 10px; border: 1px solid rgba(255,255,255,.14); color: var(--muted); border-radius: 999px; font-size: .8rem; }
+    .actions { display: flex; gap: 10px; margin-top: 14px; }
+    @media (min-width: 720px) { .card { grid-column: span 6; } }
+    @media (min-width: 1024px) { .card { grid-column: span 6; } .hero-inner { grid-template-columns: 1.2fr .8fr; } }
+
+    /* Skills */
+    .skills { display: grid; gap: 18px; grid-template-columns: repeat(1,1fr); }
+    @media (min-width: 900px){ .skills{ grid-template-columns: repeat(2,1fr);} }
+    .skill { background: var(--card); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 16px 18px; box-shadow: var(--shadow);} 
+    .skill h3{ margin:0 0 6px; font-size:1rem; font-weight:600}
+    .skill p{ margin:0; color:var(--muted)}
+
+    /* About */
+    .about { display:grid; gap:22px; grid-template-columns: 1.2fr .8fr }
+    .panel { background: var(--panel); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:20px; }
+    .tools { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px }
+    .tools .chip { border-color: rgba(255,255,255,.18) }
+    @media (max-width: 960px){ .about{ grid-template-columns: 1fr } }
+
+    /* Footer */
+    footer{ padding: 40px 0; color: var(--muted) }
+    .social{ display:flex; gap:12px }
+    .social a{ border:1px solid rgba(255,255,255,.14); padding:10px; border-radius:12px }
+
+    /* Reveal */
+    .reveal{ opacity:0; transform: translateY(14px); transition: all .6s ease }
+    .reveal.visible{ opacity:1; transform:none }
+    @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none } .card, .card:hover{ transition:none } }
+  </style>
+</head>
+<body>
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#top" class="brand">Kiet<span class="dot">.</span>Do</a>
+      <ul>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Soft Skills</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a class="btn ghost" href="assets/KD_Resume.pdf" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Resume</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero" id="top">
+    <div class="container hero-inner">
+      <div>
+        <div class="eyebrow">Data Analyst • Data Scientist</div>
+        <h1 class="title">I turn messy data into clear decisions.</h1>
+        <p class="subtitle">Senior at UW–Madison. I design and ship practical data tools that save time and drive impact.</p>
+        <div class="cta">
+          <a class="btn primary" href="#projects"><i class="fa-solid fa-folder-open"></i> View Projects</a>
+          <a class="btn ghost" href="mailto:doquangkiet2004@gmail.com"><i class="fa-solid fa-envelope"></i> Contact</a>
+        </div>
+      </div>
+      <div class="avatar-wrap">
+        <div class="blob" aria-hidden="true"></div>
+        <div class="avatar">
+          <img src="images/profile2.jpeg" alt="Portrait of Kiet Do" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Projects -->
+  <section class="section" id="projects">
+    <div class="container">
+      <h2>Selected projects</h2>
+      <p class="lead">
+      <div class="grid projects">
+        <!-- 1: GP Call Plugin -->
+        <article class="card reveal">
+          <div class="card-media">
+            <img src="images/swib.png" alt="Screenshot representing real-time meeting assistant" loading="lazy" />
+            <span class="badge">Internship Project</span>
+          </div>
+          <div class="card-body">
+            <h3>General Partner Call Plug‑in</h3>
+            <p>Real-time assistant (Azure OpenAI + Cognitive Services + Streamlit) to transcribe and summarize PE calls.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">Azure</span><span class="chip">AI</span><span class="chip">NLP</span><span class="chip">Streamlit</span>
+            </div>
+            <div class="actions">
+              <a class="btn ghost" href="#" aria-disabled="true" title="Link coming soon">Learn more</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2: Algo Trading -->
+        <article class="card reveal">
+          <div class="card-media">
+            <img src="images/trade.png" alt="Algorithmic trading charts" loading="lazy" />
+            <span class="badge">Hobby</span>
+          </div>
+          <div class="card-body">
+            <h3>Algorithmic Trading</h3>
+            <p>Value strategy using IEX Cloud + Pandas for parsing, ranking, and screening.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">IEX Cloud API</span>
+            </div>
+            <div class="actions">
+              <a class="btn ghost" href="https://github.com/kiet-doki/Algo-Trading" target="_blank" rel="noopener">Learn more</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3: Costco Green+ -->
+        <article class="card reveal">
+          <div class="card-media">
+            <img src="images/green_costco.png" alt="Costco Green+ slide thumbnail" loading="lazy" />
+            <span class="badge">Side Quest</span>
+          </div>
+          <div class="card-body">
+            <h3>Costco Green+ Proposal</h3>
+            <p>Membership concept with projected $107M revenue uplift and 7.8M mt CO₂ avoided by 2025.</p>
+            <div class="meta"><span class="chip">Excel Modeling</span><span class="chip">Strategy</span><span class="chip">Sustainability</span></div>
+            <div class="actions">
+              <a class="btn ghost" href="assets/A4S Case_compressed.pdf" target="_blank" rel="noopener">Learn more</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4: Skyworks -->
+        <article class="card reveal">
+          <div class="card-media">
+            <img src="images/skyworks.png" alt="Skyworks case slide" loading="lazy" />
+            <span class="badge">Side Quest</span>
+          </div>
+          <div class="card-body">
+            <h3>Skyworks Diversification Plan</h3>
+            <p>Addressed revenue concentration; proposed IoT/auto expansion with $1B+ potential.</p>
+            <div class="meta"><span class="chip">Market Research</span><span class="chip">FactSet</span></div>
+            <div class="actions">
+              <a class="btn ghost" href="https://drive.google.com/file/d/1AI24ouKEmPHAhoUYeOlk5szYVU4sSDq7/view?usp=sharing" target="_blank" rel="noopener">Learn more</a>
+            </div>
+          </div>
+        </article>
+
+
+        <!-- 6: Five Things -->
+        <article class="card reveal">
+          <div class="card-media">
+            <img src="images/canvas.png" alt="Learning analytics visualization" loading="lazy" />
+            <!-- <span class="badge">BigQuery • LA</span> -->
+          </div>
+          <div class="card-body">
+            <h3>Five Things (Learning Analytics)</h3>
+            <p>Surfaced course design signals in R/SQL + BigQuery; identified actionable components.</p>
+            <div class="meta"><span class="chip">R</span><span class="chip">SQL</span><span class="chip">Google Cloud BigQuery</span></div>
+            <div class="actions">
+              <a class="btn ghost" href="https://github.com/kiet-doki/five_things" target="_blank" rel="noopener">Learn more</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 7: Telecom churn -->
+        <article class="card reveal">
+          <div class="card-media">
+            <img src="images/telecom.png" alt="Telecom churn chart mock" loading="lazy" />
+            <!-- <span class="badge">EDA • BI</span> -->
+          </div>
+          <div class="card-body">
+            <h3>Telecom Churn Analysis</h3>
+            <p>Tableau-driven churn insights on a 29‑variable dataset; guided retention levers.</p>
+            <div class="meta"><span class="chip">Tableau</span><span class="chip">EDA</span></div>
+            <div class="actions">
+              <a class="btn ghost" href="https://github.com/kiet-doki/telecom_churn" target="_blank" rel="noopener">Learn more</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 8: Depth over RGB -->
+        <article class="card reveal">
+          <div class="card-media">
+            <img src="images/simulator.jpg" alt="Open surgery simulator with depth camera" loading="lazy" />
+            <span class="badge">Research Project</span>
+          </div>
+          <div class="card-body">
+            <h3>Depth over RGB</h3>
+            <p>Assisted evaluation of open‑surgery skills using a depth camera pipeline.</p>
+            <div class="meta"><span class="chip">Python</span><span class="chip">Computer Vision</span></div>
+            <div class="actions">
+              <a class="btn ghost" href="https://github.com/kiet-doki/depth_over_rgb" target="_blank" rel="noopener">Learn more</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 9: Webots -->
+        <article class="card reveal">
+          <div class="card-media">
+            <img src="images/vex.png" alt="Webots VEX IQ simulation library screenshot" loading="lazy" />
+            <span class="badge">Volunteer</span>
+          </div>
+          <div class="card-body">
+            <h3>Webots Interface Development</h3>
+            <p>Python API for VEX IQ robotics in Webots; enabled 150+ students to run advanced simulations.</p>
+            <div class="meta"><span class="chip">Python</span><span class="chip">API</span></div>
+            <div class="actions">
+              <a class="btn ghost" href="https://github.com/STEAMforVietnam/S4V_Simulation_WB/tree/master" target="_blank" rel="noopener">Learn more</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Soft Skills -->
+  <section class="section" id="skills">
 	
-					</header>
+    <div class="container">
+      <h2>Soft skills</h2>
+      <p class="lead">Four core strengths I value and take pride in most.</p>
+      <div class="skills">
+		
+        <div class="skill reveal">
+          <h3>Leadership</h3>
+          <p>Held leadership roles in student council and university clubs. I learned from inspiring mentors and strive to lead with the same guidance and integrity they showed me.</p>
+        </div>
+        <div class="skill reveal">
+          <h3>Teamwork</h3>
+          <p>Being a lifelong soccer player, I understand that as a team we are stronger. I have worked closely with diverse teams on academic, extracurricular, and professional projects.</p>
+        </div>
+        <div class="skill reveal">
+          <h3>Communication</h3>
+          <p>From public speaking to daily updates, I value clear, concise communication and continuously work to improve it.</p>
+        </div>
+        <div class="skill reveal">
+          <h3>Adaptability</h3>
+          <p>Moving from bustling Hanoi, Vietnam to a small village in Wisconsin at 14 taught me resilience and adaptability. I quickly adjust to new environments, whether in life or when learning new technologies like AI.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-				<!-- Nav -->
-					<nav id="nav">
-						<ul class="links">
-							<li class="active"><a href="index.html">Home</a></li>
-						</ul>
-						<ul class="icons">
-							<li><a href="https://www.linkedin.com/in/kiet-doki/" class="icon brands fa-linkedin" target="_blank"><span class="label">Linkedin</span></a></li>
-							<li><a href="https://github.com/kiet-doki" class="icon brands fa-github" target="_blank"><span class="label">GitHub</span></a></li>
-						</ul>
-					</nav>
+  <!-- About + Contact -->
+  <section class="section" id="about">
+    <div class="container about">
+      <div class="panel reveal">
+        <h2>About</h2>
+        <p>I am a senior at the University of Wisconsin-Madison, majoring in Data Science with minors in Computer Sciences and Economic Analytics. I am particularly interested in the fields of Data Science and Finance/Investment. I believe that data can tell compelling stories and provide meaningful insights that drive innovation and impact. I thrive in collaborative environments and enjoy bringing innovative ideas to the table.</p>
+        <div class="tools">
+          <span class="chip">Python</span>
+          <span class="chip">R</span>
+          <span class="chip">SQL</span>
+          <span class="chip">Tableau / Power BI</span>
+          <span class="chip">Azure</span>
+          <span class="chip">GCP</span>
+        </div>
+      </div>
+      <div class="panel reveal">
+        <h2>Contact</h2>
+        <p class="lead">Open to full-time roles, internships, collaborations, and soccer/tennis pick-up</p>
+        <div class="social">
+          <a href="mailto:doquangkiet2004@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+          <a href="https://www.linkedin.com/in/kiet-doki/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://github.com/kiet-doki" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="assets/KD_Resume.pdf" target="_blank" rel="noopener" aria-label="Resume"><i class="fa-solid fa-file-arrow-down"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-				<!-- Main -->
-					<div id="main">
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+      <small>© <span id="year"></span> Kiet Do</small>
+    </div>
+  </footer>
 
-						<!-- Featured Post -->
-							<article class="post featured">
-								<header class="major">
-					
-									<h2><a>About me</a></h2>
-									<p style="font-style: normal;">Hi there! I'm Kiet, a senior at the University of Wisconsin–Madison, majoring in Data Science </br>
-										 with minors in Computer Sciences and Economic Analytics. I’m passionate about using data to drive innovation and have applied my skills through internships in AI development, data analytics, and market research. </br>
-										 Lately, I’ve focused on building tools that support investment analysis, automate workflows, and </br>
-										 extract actionable insights from complex data.
+  <!-- Scripts -->
+  <script>
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-									</p>
-								</header>
-								<a class="image main"><img src='images/profile pic.png'  alt="" style="margin-top: -100px; margin-bottom: -50px;" /></a>
-								<ul class="actions special">
-								</ul>
-
-								<h1><a>My projects</a></h1>
-								<p style="font-style: normal; text-align: center;">Welcome to my projects!<br>
-									 Check out my work to see how I apply data analytics to solve real-world problems.</p>
-							</article> 	
-
-						<!-- Posts -->
-							<section class="posts">
-								
-								<article>
-									<header>
-										<h2><a href="" target="_blank">General Partner </br> Call Plug-in</a></h2>
-									</header>
-									<a href="" target="_blank" class="image fit"><img src="images/swib.png" alt="" /></a>
-									<p>Built a real-time meeting assistant using Azure OpenAI, Cognitive Services, and Streamlit to transcribe, analyze, and summarize private equity calls.</p>
-									<ul class="actions special">
-										<li><a href="" target="_blank" class="button">explore</a></li>
-									</ul>
-								</article>
-
-
-								<article>
-									<header>
-										<h2><a href="https://github.com/kiet-doki/Algo-Trading" target="_blank">Algorithmic Trading project</a></h2>
-									</header>
-									<a href="https://github.com/kiet-doki/Algo-Trading" target="_blank" class="image fit"><img src="images/trade.png" alt="" /></a>
-									<p>Developed a Python-based quantitative value investing strategy using IEX Cloud API and Pandas for data parsing and stock analysis.</p>
-									<ul class="actions special">
-										<li><a href="https://github.com/kiet-doki/Algo-Trading" target="_blank" class="button">explore</a></li>
-									</ul>
-								</article>
-
-
-								<article>
-									<header>
-									  <h2><a href="https://drive.google.com/file/d/183Z7zSjHjk1Dzom1dOr12lCo5ibCXaXi/view?usp=sharing" target="_blank">Costco Green+ </br> Membership Proposal</a></h2>
-									</header>
-									<a href="https://drive.google.com/file/d/183Z7zSjHjk1Dzom1dOr12lCo5ibCXaXi/view?usp=sharing" target="_blank" class="image fit"><img src="images/green_costco.png" alt="" /></a>
-									<p>Designed a sustainability-driven strategy for Costco, proposing a Green+ membership program with cashback, subsidies, and carbon tracking. Projected $107M in revenue uplift and 7.8M metric tons CO₂ eliminated by 2025.</p>
-									<ul class="actions special">
-									  <li><a href="https://drive.google.com/file/d/183Z7zSjHjk1Dzom1dOr12lCo5ibCXaXi/view?usp=sharing" target="_blank" class="button">explore</a></li>
-									</ul>
-								  </article>
-
-
-								<article>
-									<header>
-									  <h2><a href="https://drive.google.com/file/d/1AI24ouKEmPHAhoUYeOlk5szYVU4sSDq7/view?usp=sharing" target="_blank">Skyworks </br> Diversification Plan</a></h2>
-									</header>
-									<a href="https://drive.google.com/file/d/1AI24ouKEmPHAhoUYeOlk5szYVU4sSDq7/view?usp=sharing" target="_blank" class="image fit"><img src="images/skyworks.png" alt="Skyworks Diversification Plan" /></a>
-									<p>Analyzed Skyworks Solutions’ revenue concentration and market risks; developed a diversification strategy into IoT and automotive markets with $1B+ revenue potential.</p>
-									<ul class="actions special">
-									  <li><a href="https://drive.google.com/file/d/1AI24ouKEmPHAhoUYeOlk5szYVU4sSDq7/view?usp=sharing" target="_blank" class="button">explore</a></li>
-									</ul>
-								</article>
-
-
-								<article>
-									<header>
-										<h2><a href="https://github.com/kiet-doki/Demographic-Analysis" target="_blank">Students demographic analysis</a></h2>
-									</header>
-									<a href="https://github.com/kiet-doki/Demographic-Analysis" target="_blank" class="image fit"><img src="images/demographic.png" alt="" /></a>
-									<p>Conducted SQL-based data sourcing and R-driven demographic analysis for 70,000 students, aiding Academic Deans on underrepresented groups.</p>
-									<ul class="actions special">
-										<li><a href="https://github.com/kiet-doki/Demographic-Analysis" target="_blank" class="button">explore</a></li>
-									</ul>
-								</article>
-
-
-								<article>
-									<header>
-										<h2><a href="https://github.com/kiet-doki/five_things">Five Things</a></h2>
-									</header>
-									<a href="https://github.com/kiet-doki/five_things" class="image fit"><img src="images/canvas.png" alt="" /></a>
-									<p>Explored the impact of higher-ed course design using R and SQL, and managed data in Google BigQuery. Focused on identifying the five most important components for learning analytics.</p>
-									<ul class="actions special">
-										<li><a href="https://github.com/kiet-doki/five_things" class="button">explore</a></li>
-									</ul>
-								</article>
-
-
-								<article>
-									<header>
-										<h2><a href="https://github.com/kiet-doki/telecom_churn" target="_blank">Telecom Customer Churn Analysis</a></h2>
-									</header>
-									<a href="https://github.com/kiet-doki/telecom_churn" target="_blank" class="image fit"><img src="images/telecom.png" alt="" /></a>
-									<p>Utilized Tableau to perform churn analysis on a 29-variable telecom dataset, driving actionable insights for retention strategies.</p>
-									<ul class="actions special">
-										<li><a href="https://github.com/kiet-doki/telecom_churn" target="_blank" class="button">explore</a></li>
-									</ul>
-								</article>
-
-								<article>
-									<header>
-										<h2><a href="https://github.com/kiet-doki/depth_over_rgb" target="_blank">Depth over RGB</a></h2>
-									</header>
-									<a href="https://github.com/kiet-doki/depth_over_rgb" target="_blank" class="image fit"><img src="images/simulator.jpg" alt="" /></a>
-									<p>Assisted in automatic evaluation of open surgery skills using depth camera.</p>
-									<ul class="actions special">
-										<li><a href="https://github.com/kiet-doki/depth_over_rgb" target="_blank" class="button">explore</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-										<h2><a href="#">Bank Customer Churn Prediction</a></h2>
-									</header>
-									<a href="#" class="image fit"><img src="images/bank.jpeg" alt="" /></a>
-									<p>Predicted customer churn using Python, Pandas, scikit-learn, and Spark, from data exploration to model deployment.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">explore</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-										<h2><a href="https://github.com/STEAMforVietnam/S4V_Simulation_WB/tree/master" target="_blank">Webots Interface Development</a></h2>
-									</header>
-									<a href="https://github.com/STEAMforVietnam/S4V_Simulation_WB/tree/master" target="_blank" class="image fit"><img src="https://i.postimg.cc/C1f4WWTp/Screen-Shot-2024-06-23-at-10-11-07-AM.png" alt="" /></a>
-									<p>Developed a Python API library for Webots to simulate VEX IQ robots, enabling 150+ students to access advanced robotics simulations without physical robots.</p>
-									<ul class="actions special">
-										<li><a href="https://github.com/STEAMforVietnam/S4V_Simulation_WB/tree/master" target="_blank" class="button">explore</a></li>
-									</ul>
-								</article>
-
-
-								
-
-								
-								
-				
-								
-							</section>
-
-			
-
-	
-
-				<!-- Copyright -->
-					<div id="copyright">
-						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
-					</div>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
-
+    // Reveal on scroll
+    const revealEls = Array.from(document.querySelectorAll('.reveal'));
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, {threshold:.14});
+    revealEls.forEach(el=>io.observe(el));
+  </script>
+</body>
 </html>
+
